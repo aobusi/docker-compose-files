@@ -1,0 +1,23 @@
+# elasticsearch-setup-passwords interactive
+version: '3.7'
+services:
+  elasticsearch:
+    container_name: elasticsearch
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.6.2
+    restart: always
+    network_mode: "host"
+    volumes:
+      - data:/data/elasticsearch
+    environment:
+      - http.host=172.16.10.59
+      - http.port=9200
+      - transport.tcp.port=172.16.10.59
+      - transport.tcp.port=9300
+      - cluster.name=es
+      - node.name=es
+      - discovery.type=single-node
+      - xpack.security.enabled=true
+      - xpack.monitoring.enabled=true
+      - "ES_JAVA_OPTS=-Xms4096m -Xmx7168m"
+volumes:
+  data:
